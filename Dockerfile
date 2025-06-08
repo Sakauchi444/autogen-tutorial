@@ -14,4 +14,4 @@ COPY . .
 
 EXPOSE 8888
 
-CMD ["python", "main_selector.py"]
+CMD ["python", "main_intelligent_selector.py"]

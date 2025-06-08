@@ -10,6 +10,23 @@ AutoGenライブラリを使用したマルチエージェントシステムで�
 - リアルタイム天気連動レコメンド
 - 専門分野特化エージェント
 
+## 🤖 インテリジェント自動選択システム ✨ NEW!
+
+AIがユーザーの要望を分析し、最適なGroupChat方式を自動選択します。
+
+**特徴**:
+- ユーザー要望の自動分析
+- 最適なGroupChat方式の選択
+- 信頼度とその理由を提示
+- 初心者にも最適化された体験
+
+**分析指標**:
+- 要望の具体性（具体的→Selector、抽象的→Swarm）
+- 対象範囲（特定分野→Selector、包括的→Round Robin）
+- 創造性要求（高い→Swarm、標準→Round Robin）
+- 効率重視度（高い→Selector、標準→Round Robin）
+- 特別感（重要→Swarm、通常→他方式）
+
 ## 🎯 3つのGroupChat方式
 
 このシステムでは、AutoGenの3つのGroupChat方式を実装し、それぞれ異なるアプローチでレコメンドを提供します。
@@ -101,14 +118,15 @@ cp .env.example .env
 
 ### 2. Docker環境での起動
 ```bash
-# 比較システム（全方式を試せる）
+# インテリジェント自動選択システム（推奨）
 docker compose up --build
 
 # または個別実行
-python main_round_robin.py    # Round Robin方式
-python main_selector.py      # Selector方式  
-python main_swarm.py         # Swarm方式
-python main_comparison.py    # 比較システム
+python main_intelligent_selector.py  # AI自動選択システム
+python main_round_robin.py          # Round Robin方式
+python main_selector.py             # Selector方式  
+python main_swarm.py                # Swarm方式
+python main_comparison.py           # 比較システム
 ```
 
 ## 🔑 必要なAPIキー
@@ -158,8 +176,23 @@ docker compose up --build
 
 | 方式 | 適用シーン | 特徴 |
 |------|------------|------|
+| **🤖 インテリジェント選択** | すべての要望・初心者 | AI分析・最適化 |
 | **Round Robin** | 初回訪問・包括提案 | 構造化・確実性 |
 | **Selector** | 特化要望・効率重視 | 専門性・効率性 |
 | **Swarm** | 革新提案・多角分析 | 創発性・多様性 |
+
+## 🚀 使用例とAI選択パターン
+
+```bash
+# システム起動
+docker compose up --build
+
+# 要望例とAIが選択する方式
+"美味しいランチを食べたい" → Selector方式（具体的・特化要望）
+"初めて竹芝に来ました" → Round Robin方式（包括的・段階的案内）
+"特別な記念日を過ごしたい" → Swarm方式（創造性・ユニークさ重視）
+"雨の日でも楽しめる場所" → Selector方式（効率的・専門対応）
+"面白くて新しい体験がしたい" → Swarm方式（革新性・多角分析）
+```
 
 各方式で異なる議論展開と提案結果が得られ、AutoGenのGroupChat機能の多様性を体験できます！

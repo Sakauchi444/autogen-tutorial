@@ -8,6 +8,7 @@ from dotenv import load_dotenv
 from main_round_robin import TakeshibaRoundRobinSystem
 from main_selector import TakeshibaSelectorSystem  
 from main_swarm import TakeshibaSwarmSystem
+from main_intelligent_selector import IntelligentGroupChatSelector
 
 # 環境変数を読み込み
 load_dotenv()
@@ -17,14 +18,20 @@ class GroupChatComparison:
         self.systems = {
             "round_robin": TakeshibaRoundRobinSystem(),
             "selector": TakeshibaSelectorSystem(),
-            "swarm": TakeshibaSwarmSystem()
+            "swarm": TakeshibaSwarmSystem(),
+            "intelligent": IntelligentGroupChatSelector()
         }
     
     def show_comparison_menu(self):
         """比較メニューを表示"""
         print("""
 === AutoGen GroupChat方式比較システム ===
-竹芝ポートシティレコメンドシステムで3つの方式を体験
+竹芝ポートシティレコメンドシステムで各方式を体験
+
+🤖【0. インテリジェント自動選択】✨ NEW!
+特徴: AIがユーザー要望を分析し最適な方式を自動選択
+適用: 初心者向け、最適化された体験、手間なし
+流れ: 要望分析 → 最適方式選択 → 自動実行
 
 【1. Round Robin方式】
 特徴: 順番に発言、構造化された議論
@@ -52,6 +59,7 @@ class GroupChatComparison:
                 
                 choice = input("""
 選択してください:
+0. インテリジェント自動選択（おすすめ）✨
 1. Round Robin方式を試す
 2. Selector方式を試す  
 3. Swarm方式を試す
@@ -60,7 +68,13 @@ class GroupChatComparison:
 
 番号を入力: """)
                 
-                if choice == "1":
+                if choice == "0":
+                    print("\n" + "="*70)
+                    print("🤖 インテリジェント自動選択を開始します...")
+                    print("="*70)
+                    self.systems["intelligent"].start_intelligent_system()
+                    
+                elif choice == "1":
                     print("\n" + "="*70)
                     print("Round Robin方式を開始します...")
                     print("="*70)
@@ -86,7 +100,7 @@ class GroupChatComparison:
                     break
                     
                 else:
-                    print("\n無効な選択です。1-5の番号を入力してください。")
+                    print("\n無効な選択です。0-5の番号を入力してください。")
                     
             except KeyboardInterrupt:
                 print("\n\nシステムを終了します。")
